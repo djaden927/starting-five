@@ -16,19 +16,48 @@ const initialStartingFive = {
 
 const MainTeamBuilderBox = styled.div`
     display: flex;
+    justify-content: space-around;
+    max-width: 50%;
 `
 
 const TeamSelector = styled.div`
-    margin: 0 5%;
     border: 1px solid blue;
+    display: flex;
+    margin-left: 5%;
+    flex-wrap: wrap;
 `
+
+const MyTeam = styled.div`
+    border: 1px solid blue;
+    width: 50%;
+`
+
+const PlayerCards = styled.div`
+    width: 51%;
+    display:flex;
+    justify-content: flex-start;
+`
+
+const Pick = styled.button`
+    border: 1px solid red;
+    height: 25px;
+    margin: auto;
+    &:hover {
+        border: 5px solid red;
+    }
+`
+
 let count = 0
 export default function TeamBuilder(){
     const [fiveTeams, setFiveTeams] = useState([])
     const [myStartingFive, setMyStartingFive] = useState(initialStartingFive)
-    
+    const [teamComplete, setTeamComplete] = useState("incomplete")
 
     const newTeam = () => {
+        if(count === 5){
+            setMyStartingFive(initialStartingFive)
+            count = 0
+        }
         let randomTeamList = []
         for(let i = 0; i < 5; i++){
             randomTeamList.push(data[Math.floor(Math.random() * 30)])
@@ -42,6 +71,9 @@ export default function TeamBuilder(){
         })
         count += 1
         console.log(count)
+        if(count === 5){
+            setTeamComplete("complete")
+        }
     }
 
 
@@ -53,21 +85,21 @@ export default function TeamBuilder(){
             <MainTeamBuilderBox>
                 {fiveTeams.length > 0 && count < 5 ? 
                 <TeamSelector>
-                <h2>{fiveTeams[count].PG}</h2>   <button onClick={addPlayer} value={fiveTeams[count].PG} id="PG">Pick {fiveTeams[count].PG}</button>
-                <h2>{fiveTeams[count].SG}</h2>  <button onClick={addPlayer} value={fiveTeams[count].SG} id="SG">Pick {fiveTeams[count].SG}</button>
-                <h2>{fiveTeams[count].SF}</h2>  <button onClick={addPlayer} value={fiveTeams[count].SF} id="SF">Pick {fiveTeams[count].SF}</button>
-                <h2>{fiveTeams[count].PF}</h2>  <button onClick={addPlayer} value={fiveTeams[count].PF} id="PF">Pick {fiveTeams[count].PF}</button>
-                <h2>{fiveTeams[count].C}</h2>  <button onClick={addPlayer} value={fiveTeams[count].C} id="C">Pick {fiveTeams[count].C}</button>
+                <PlayerCards><h3>{fiveTeams[count].PG}</h3>   <Pick onClick={addPlayer} value={fiveTeams[count].PG} id="PG">Pick {fiveTeams[count].PG}</Pick></PlayerCards>
+                <PlayerCards><h3>{fiveTeams[count].SG}</h3>  <Pick onClick={addPlayer} value={fiveTeams[count].SG} id="SG">Pick {fiveTeams[count].SG}</Pick></PlayerCards>
+                <PlayerCards><h3>{fiveTeams[count].SF}</h3>  <Pick onClick={addPlayer} value={fiveTeams[count].SF} id="SF">Pick {fiveTeams[count].SF}</Pick></PlayerCards>
+                <PlayerCards><h3>{fiveTeams[count].PF}</h3>  <Pick onClick={addPlayer} value={fiveTeams[count].PF} id="PF">Pick {fiveTeams[count].PF}</Pick></PlayerCards>
+                <PlayerCards><h3>{fiveTeams[count].C}</h3>  <Pick onClick={addPlayer} value={fiveTeams[count].C} id="C">Pick {fiveTeams[count].C}</Pick></PlayerCards>
                 </TeamSelector> : null}
 
-                <div>
+                <MyTeam className={teamComplete}>
                     <h2>My starting five</h2>
                     <h3>PG: {myStartingFive.PG}</h3>
                     <h3>SG: {myStartingFive.SG}</h3>
                     <h3>SF: {myStartingFive.SF}</h3>
                     <h3>PF: {myStartingFive.PF}</h3>
                     <h3>C: {myStartingFive.C}</h3>
-                </div>
+                </MyTeam>
             </MainTeamBuilderBox>
         </div>
     )

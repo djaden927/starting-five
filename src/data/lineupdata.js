@@ -195,7 +195,7 @@ export const data = [
         "team": "Suns",
         "PG": "Chris Paul",
         "SG": "Devin Booker",
-        "SF": "Miles Bridges",
+        "SF": "Mikal Bridges",
         "PF": "Jae Crowder",
         "C": "Deandre Ayton"
     },
