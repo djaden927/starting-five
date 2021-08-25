@@ -61,6 +61,7 @@ export default function TeamBuilder(){
     const [myStartingFive, setMyStartingFive] = useState(initialStartingFive)
     const [teamComplete, setTeamComplete] = useState("incomplete")
     const [availablePositions, setAvailablePositions] = useState(initialAvailablePositions)
+    const [startTeam, setStartTeam] = useState(false)
 
     const newTeam = () => {
         if(count === 5){
@@ -73,6 +74,7 @@ export default function TeamBuilder(){
             randomTeamList.push(data[Math.floor(Math.random() * 30)])
         }
         setFiveTeams(randomTeamList)
+        setStartTeam(true)
     }
 
     const addPlayer = (e) => {
@@ -82,10 +84,11 @@ export default function TeamBuilder(){
         setAvailablePositions({...availablePositions,
             [e.target.id]: true
         })
+        
         count += 1
-        console.log(count)
         if(count === 5){
             setTeamComplete("complete")
+            setStartTeam(false)
         }
     }
 
@@ -94,15 +97,20 @@ export default function TeamBuilder(){
 
         <div>
             <h1>teambuilder page</h1>
-            <button onClick={newTeam}>build a new team</button>
+            <button disabled={startTeam} onClick={newTeam}>build a new team</button>
             <MainTeamBuilderBox>
                 {fiveTeams.length > 0 && count < 5 ? 
                 <TeamSelector>
-                <PlayerCards><h3>{fiveTeams[count].PG}</h3>  <Pick disabled={availablePositions.PG} onClick={addPlayer} value={fiveTeams[count].PG} id="PG">Pick {fiveTeams[count].PG}</Pick></PlayerCards>
-                <PlayerCards><h3>{fiveTeams[count].SG}</h3>  <Pick disabled={availablePositions.SG} onClick={addPlayer} value={fiveTeams[count].SG} id="SG">Pick {fiveTeams[count].SG}</Pick></PlayerCards>
-                <PlayerCards><h3>{fiveTeams[count].SF}</h3>  <Pick disabled={availablePositions.SF} onClick={addPlayer} value={fiveTeams[count].SF} id="SF">Pick {fiveTeams[count].SF}</Pick></PlayerCards>
-                <PlayerCards><h3>{fiveTeams[count].PF}</h3>  <Pick disabled={availablePositions.PF} onClick={addPlayer} value={fiveTeams[count].PF} id="PF">Pick {fiveTeams[count].PF}</Pick></PlayerCards>
-                <PlayerCards><h3>{fiveTeams[count].C}</h3>  <Pick disabled={availablePositions.C} onClick={addPlayer} value={fiveTeams[count].C} id="C">Pick {fiveTeams[count].C}</Pick></PlayerCards>
+                <PlayerCards><h3>{fiveTeams[count].PG}</h3>  
+                <Pick disabled={availablePositions.PG} onClick={addPlayer} value={fiveTeams[count].PG} id="PG">Pick {fiveTeams[count].PG}</Pick></PlayerCards>
+                <PlayerCards><h3>{fiveTeams[count].SG}</h3> 
+                 <Pick disabled={availablePositions.SG} onClick={addPlayer} value={fiveTeams[count].SG} id="SG">Pick {fiveTeams[count].SG}</Pick></PlayerCards>
+                <PlayerCards><h3>{fiveTeams[count].SF}</h3>  
+                <Pick disabled={availablePositions.SF} onClick={addPlayer} value={fiveTeams[count].SF} id="SF">Pick {fiveTeams[count].SF}</Pick></PlayerCards>
+                <PlayerCards><h3>{fiveTeams[count].PF}</h3> 
+                 <Pick disabled={availablePositions.PF} onClick={addPlayer} value={fiveTeams[count].PF} id="PF">Pick {fiveTeams[count].PF}</Pick></PlayerCards>
+                <PlayerCards><h3>{fiveTeams[count].C}</h3> 
+                 <Pick disabled={availablePositions.C} onClick={addPlayer} value={fiveTeams[count].C} id="C">Pick {fiveTeams[count].C}</Pick></PlayerCards>
                 </TeamSelector> : null}
 
                 <MyTeam className={teamComplete}>
