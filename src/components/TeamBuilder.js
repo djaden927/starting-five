@@ -25,34 +25,41 @@ const initialAvailablePositions = {
 const MainTeamBuilderBox = styled.div`
     display: flex;
     justify-content: space-around;
-    max-width: 50%;
+    margin: 0 auto;
+    max-width: 90%;
+    border: 1px solid red;
 `
 
 const TeamSelector = styled.div`
     border: 1px solid blue;
     display: flex;
-    margin-left: 5%;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 `
 
 const MyTeam = styled.div`
     border: 1px solid blue;
-    width: 50%;
+    width: 100%;
 `
 
 const PlayerCards = styled.div`
     width: 51%;
     display:flex;
     justify-content: flex-start;
+
 `
 
 const Pick = styled.button`
-    border: 1px solid red;
-    height: 25px;
+    // border: 1px solid red;
+    height: auto;
     margin: auto;
+    width: 100%;
     &:hover {
-        border: 5px solid red;
+        border: 2px solid black;
     }
+`
+const PlayerName = styled.h3`
+    width: 100%;
 `
 
 let count = 0
@@ -64,6 +71,7 @@ export default function TeamBuilder(){
     const [startTeam, setStartTeam] = useState(false)
 
     const newTeam = () => {
+        setTeamComplete('incomplete')
         if(count === 5){
             setMyStartingFive(initialStartingFive)
             setAvailablePositions(initialAvailablePositions)
@@ -96,22 +104,21 @@ export default function TeamBuilder(){
     return(
 
         <div>
-            <h1>teambuilder page</h1>
             <button disabled={startTeam} onClick={newTeam}>build a new team</button>
-            <MainTeamBuilderBox>
                 {fiveTeams.length > 0 && count < 5 ? 
+            <MainTeamBuilderBox>
                 <TeamSelector>
-                <PlayerCards><h3>{fiveTeams[count].PG}</h3>  
+                <PlayerCards><PlayerName>{fiveTeams[count].PG}</PlayerName>  
                 <Pick disabled={availablePositions.PG} onClick={addPlayer} value={fiveTeams[count].PG} id="PG">Pick {fiveTeams[count].PG}</Pick></PlayerCards>
-                <PlayerCards><h3>{fiveTeams[count].SG}</h3> 
+                <PlayerCards><PlayerName>{fiveTeams[count].SG}</PlayerName> 
                  <Pick disabled={availablePositions.SG} onClick={addPlayer} value={fiveTeams[count].SG} id="SG">Pick {fiveTeams[count].SG}</Pick></PlayerCards>
-                <PlayerCards><h3>{fiveTeams[count].SF}</h3>  
+                <PlayerCards><PlayerName>{fiveTeams[count].SF}</PlayerName>  
                 <Pick disabled={availablePositions.SF} onClick={addPlayer} value={fiveTeams[count].SF} id="SF">Pick {fiveTeams[count].SF}</Pick></PlayerCards>
-                <PlayerCards><h3>{fiveTeams[count].PF}</h3> 
+                <PlayerCards><PlayerName>{fiveTeams[count].PF}</PlayerName> 
                  <Pick disabled={availablePositions.PF} onClick={addPlayer} value={fiveTeams[count].PF} id="PF">Pick {fiveTeams[count].PF}</Pick></PlayerCards>
-                <PlayerCards><h3>{fiveTeams[count].C}</h3> 
+                <PlayerCards><PlayerName>{fiveTeams[count].C}</PlayerName> 
                  <Pick disabled={availablePositions.C} onClick={addPlayer} value={fiveTeams[count].C} id="C">Pick {fiveTeams[count].C}</Pick></PlayerCards>
-                </TeamSelector> : null}
+                </TeamSelector>
 
                 <MyTeam className={teamComplete}>
                     <h2>My starting five</h2>
@@ -122,6 +129,16 @@ export default function TeamBuilder(){
                     <h3>C: {myStartingFive.C}</h3>
                 </MyTeam>
             </MainTeamBuilderBox>
+                 : null}
+
+                 {count === 5 ? <MyTeam className={teamComplete}>
+                    <h2>My starting five</h2>
+                    <h3>PG: {myStartingFive.PG}</h3>
+                    <h3>SG: {myStartingFive.SG}</h3>
+                    <h3>SF: {myStartingFive.SF}</h3>
+                    <h3>PF: {myStartingFive.PF}</h3>
+                    <h3>C: {myStartingFive.C}</h3>
+                </MyTeam> : null}
         </div>
     )
 }
