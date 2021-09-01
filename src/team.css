@@ -1,0 +1,76 @@
+.playerButton{
+    line-height: 40px;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #333;
+    border: 2px solid #333;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+    position: relative;
+    z-index: 2;
+}
+
+
+.playerButton:after{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #ee6730;
+    transition: all .35s;
+    opacity: 0.5;
+  }
+  
+.playerButton:hover{
+  color: #000;
+}
+
+.playerButton:hover:after{
+  width: 100%;
+}
+
+.playerSelected{
+    opacity: 0.5;
+    filter: blur(0.75px);
+}
+
+.teamComplete{
+    text-align: center;
+}
+
+header{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    background-color:#fdfdfd88;
+    margin-bottom: 2%;
+}
+
+.headerButton{
+    width: 10%;
+}
+
+.postTeamCreate{
+    width:37%;
+}
+
+.teamBuilder{
+    background-image: url('jean-philippe-delberghe-jQ2FtAnmmfc-unsplash.jpg');
+    background-size: cover;
+    height: 1000px;
+    /* background-position: center;  */
+}
+
+.teamPicker:hover{
+    background-color:#8EB1D9;
+    z-index: 100;
+    opacity: 1;
+    cursor: pointer;
+    border: 4px solid green;
+}
