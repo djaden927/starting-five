@@ -50,13 +50,6 @@ const MyTeam = styled.div`
     margin: 1%;
 `
 
-const PlayerCards = styled.div`
-    width: 51%;
-    display:flex;
-    justify-content: flex-start;
-
-`
-
 const Pick = styled.button`
     height: auto;
     margin: .5% auto;
@@ -72,9 +65,6 @@ const Pick = styled.button`
     position: relative;
     position: relative;
     z-index: 2;
-`
-const PlayerName = styled.h3`
-    width: 100%;
 `
 
 const StartGame = styled.button`
@@ -132,7 +122,6 @@ export default function TeamBuilder(props){
     const [myStartingFive, setMyStartingFive] = useState(initialStartingFive)
     const [teamComplete, setTeamComplete] = useState("incomplete")
     const [availablePositions, setAvailablePositions] = useState(initialAvailablePositions)
-    const [startTeam, setStartTeam] = useState(false)
     const history = useHistory();
 
     useEffect(() => {
@@ -151,7 +140,6 @@ export default function TeamBuilder(props){
             randomTeamList.push(data[Math.floor(Math.random() * 30)])
         }
         setFiveTeams(randomTeamList)
-        setStartTeam(true)
     }
 
     const additionalTeam = () => {
@@ -188,7 +176,6 @@ export default function TeamBuilder(props){
         count += 1
         if(count === 5){            
             setTeamComplete("complete")
-            setStartTeam(false)
         }
     }
 
@@ -225,7 +212,6 @@ export default function TeamBuilder(props){
             <header>
             <StartGame className="headerButton" onClick={rankTeamsWithoutSubmit}>Rank teams</StartGame>
             <StartGame className="headerButton" onClick={logout}>Logout</StartGame> 
-                {/* <StartGame disabled={startTeam} onClick={newTeam}>build a new team</StartGame> */}
             </header>
             
                 {fiveTeams.length > 0 && count < 5 ? 

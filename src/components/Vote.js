@@ -18,13 +18,6 @@ const MainTeamBuilderBox = styled.div`
     max-width: 90%;
 `
 
-const TeamSelector = styled.div`
-    border: 1px solid blue;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-`
-
 const MyTeam = styled.div`
 border: 4px solid #051094;
 width: 70%;
@@ -32,12 +25,6 @@ display: flex;
 flex-wrap: wrap;
 justify-content: center;
 margin: 1%;
-`
-
-const PlayerCards = styled.div`
-    width: 51%;
-    display:flex;
-    justify-content: flex-start;
 `
 
 const Pick = styled.button`
@@ -55,10 +42,6 @@ const Pick = styled.button`
     position: relative;
     position: relative;
     z-index: 2;
-`
-
-const PlayerName = styled.h3`
-    width: 100%;
 `
 
 const StartGame = styled.button`

@@ -1,8 +1,8 @@
 
-import React, {useEffect, useState} from "react"
-import styled from "styled-components"
+import React, {useEffect} from "react"
+// import styled from "styled-components"
 import '../../src/team.css';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import axiosWithAuth from "../axiosAuth";
 
 
