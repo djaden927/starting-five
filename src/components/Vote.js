@@ -15,6 +15,10 @@ const MainTeamBuilderBox = styled.div`
     justify-content: space-around;
     margin: 0 auto;
     max-width: 90%;
+
+    @media(max-width: 450px) {
+        max-width:100%;
+    }
 `
 
 const MyTeam = styled.div`
@@ -24,6 +28,11 @@ display: flex;
 flex-wrap: wrap;
 justify-content: center;
 margin: 1%;
+
+@media(max-width: 450px) {
+    border: 3px solid #051094;
+    width:90%;
+}
 `
 
 const Pick = styled.button`
@@ -41,6 +50,11 @@ const Pick = styled.button`
     position: relative;
     position: relative;
     z-index: 2;
+    @media(max-width: 450px) {
+        width:95%;
+        letter-spacing: 1px;
+        border: 1px solid #333;
+    }
 `
 
 const StartGame = styled.button`
@@ -64,6 +78,10 @@ const StartGame = styled.button`
 	    box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
 	    transition: all 0.4s ease 0s;
     }
+
+    @media(max-width: 450px) {
+        width:30%;
+    }
 `
 
 const StartingFiveTitle = styled.h2`
@@ -71,6 +89,10 @@ const StartingFiveTitle = styled.h2`
     width: 30%;
     background-color: #ee6730;
     text-transform: uppercase;
+
+    @media(max-width: 450px) {
+        width:75%;
+    }
 `
 
 const initialTwoTeams = []

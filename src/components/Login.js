@@ -1,5 +1,6 @@
 import axios from 'axios'; //eslint-disable-line
 import React, { useState } from 'react';
+import '../App.css';
 
 import styled from 'styled-components'; //eslint-disable-line
 import { useHistory } from 'react-router-dom'; //eslint-disable-line
@@ -43,29 +44,32 @@ export default function Login (props) {
     return(
        
 
-        <div> 
-            <h1>Login</h1>
-            <form>
-            <label>Username 
+        <div className="main"> 
+            <p class="sign" align="center">Sign in</p>
+            <form className="form1"> 
                     <input
+                        className="un"
+                        align="center"
                         value={values.username}
                         onChange={onChange}
                         name='username'
                         type='text'
-                        placeholder='kevinhookemhorns'
+                        placeholder='username'
                         />
-                </label>
-                <label> Password 
+
                     <input 
+                        className="pass"
+                        align="center"
                         value={values.password}
                         onChange={onChange}
                         name='password'
                         type='password'
+                        placeholder="password"
                     />
-                </label>
 
-                <button onClick={onSubmit} className="submitButton">Login</button>
-                <button onClick={register}>Create an account</button>
+
+                <button className="submit" align="center" onClick={onSubmit}>Login</button>
+                <button className="submit" align="center" onClick={register}>Create an account</button>
                 
             </form>
         </div>

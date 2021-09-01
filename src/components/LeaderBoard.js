@@ -26,6 +26,9 @@ const StartGame = styled.button`
 	    box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
 	    transition: all 0.4s ease 0s;
     }
+    @media(max-width: 450px) {
+        width:30%;
+    }
 `
 
 const Pick = styled.button`
@@ -51,6 +54,10 @@ const MainTeamBuilderBox = styled.div`
     margin: 0 auto;
     max-width: 90%;
     width: 90%;
+    @media(max-width: 450px) {
+        display: block;
+        justify-content: center;
+    }
 `
 
 const MyTeam = styled.div`
@@ -60,6 +67,10 @@ const MyTeam = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     margin: 1%;
+    @media(max-width: 450px) {
+        width: 75%;
+        margin: 1% auto;
+    }
 `
 
 const StartingFiveTitle = styled.h2`
@@ -112,7 +123,7 @@ export default function LeaderBoard(props){
                     return (
 
                         <MyTeam key={team.team_id}>
-                            <StartingFiveTitle>GM: {team.username} | Wins: {team.wins} | Losses: {team.losses} | Win%: {team.win_percentage * 100}</StartingFiveTitle>
+                            <StartingFiveTitle>GM: {team.username}  Wins: {team.wins}  Losses: {team.losses}  Win%: {team.win_percentage * 100}</StartingFiveTitle>
                             <Pick>{team.PG}</Pick>
                             <Pick>{team.SG}</Pick>
                             <Pick>{team.SF}</Pick>
@@ -124,7 +135,7 @@ export default function LeaderBoard(props){
                 })}
             </MainTeamBuilderBox>
 
-            
+
 
         </div>
     )

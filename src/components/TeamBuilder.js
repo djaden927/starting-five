@@ -30,14 +30,24 @@ const MainTeamBuilderBox = styled.div`
     justify-content: space-around;
     margin: 0 auto;
     max-width: 90%;
+
+    @media(max-width: 450px) {
+        max-width: 100%;
+    }
 `
 
 const TeamSelector = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
     border: 4px solid #051094;
     margin: 1%;
+
+    @media(max-width: 450px) {
+        border: 3px solid #051094;
+        margin: 0.5%;
+        width:50%;
+    }
 `
 
 const MyTeam = styled.div`
@@ -47,6 +57,28 @@ const MyTeam = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     margin: 1%;
+
+    @media(max-width: 450px) {
+        border: 3px solid #051094;
+        margin: 0.5%;
+        width:50%;
+    }
+`
+
+const MyCompleteTeam = styled.div`
+    border: 4px solid #051094;
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1%;
+
+    @media(max-width: 450px) {
+        border: 3px solid #051094;
+        margin: 0.5%;
+        width:80%;
+        margin: 1% auto;
+    }
 `
 
 const Pick = styled.button`
@@ -64,6 +96,39 @@ const Pick = styled.button`
     position: relative;
     position: relative;
     z-index: 2;
+
+    @media(max-width: 450px) {
+        width: 95%;
+        letter-spacing: 1px;
+        font-size: 16px;
+    }
+`
+
+const HeaderButtons = styled.button`
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ee6730;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    // width: 37%;
+    margin: 1%;
+
+    &:hover{
+        background: #434343;
+	    letter-spacing: 1px;
+	    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+	    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+	    box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+	    transition: all 0.3s ease 0s;
+    }
+
+    @media(max-width: 450px) {
+        width:30%;
+    }
 `
 
 const StartGame = styled.button`
@@ -87,6 +152,10 @@ const StartGame = styled.button`
 	    box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
 	    transition: all 0.3s ease 0s;
     }
+
+    @media(max-width: 450px) {
+        width:47%;
+    }
 `
 
 const StartingFiveTitle = styled.h2`
@@ -94,6 +163,11 @@ const StartingFiveTitle = styled.h2`
     width: 30%;
     background-color: #ee6730;
     text-transform: uppercase;
+
+    @media(max-width: 450px) {
+        width:95%;
+        font-size: 20px;
+    }
 `
 const Positions = styled.button`
     height: auto;
@@ -110,6 +184,12 @@ const Positions = styled.button`
     position: relative;
     position: relative;
     z-index: 2;
+
+    @media(max-width: 450px) {
+        width: 95%;
+        letter-spacing: 1px;
+        font-size: 16px;
+    }
 `
 
 let count = 0
@@ -124,6 +204,7 @@ export default function TeamBuilder(props){
     const history = useHistory();
 
     useEffect(() => {
+        count = 0
         newTeam()
     }, [])
 
@@ -199,9 +280,13 @@ export default function TeamBuilder(props){
 
     const rankTeamsWithoutSubmit = (evt) => {
         evt.preventDefault()
-        count = 0
-        setMyStartingFive(initialStartingFive)
-        history.push('/rank-teams')
+        if(count === 5){
+            rankTeams(evt)
+        }else{
+            count = 0
+            setMyStartingFive(initialStartingFive)
+            history.push('/rank-teams')
+        }
     }
 
     const leaderBoard = (evt) => {
@@ -215,9 +300,9 @@ export default function TeamBuilder(props){
 
         <div className="teamBuilder">
             <header>
-            <StartGame className="headerButton" onClick={rankTeamsWithoutSubmit}>Rank teams</StartGame>
-            <StartGame className="headerButton" onClick={leaderBoard}>View Leaderboard</StartGame>
-            <StartGame className="headerButton" onClick={logout}>Logout</StartGame> 
+            <HeaderButtons className="headerButton" onClick={rankTeamsWithoutSubmit}>Rank teams</HeaderButtons>
+            <HeaderButtons className="headerButton" onClick={leaderBoard}>View Leaderboard</HeaderButtons>
+            <HeaderButtons className="headerButton" onClick={logout}>Logout</HeaderButtons> 
             </header>
             
                 {fiveTeams.length > 0 && count < 5 ? 
@@ -232,7 +317,7 @@ export default function TeamBuilder(props){
                 </TeamSelector>
 
                 <MyTeam >
-                    <StartingFiveTitle>My starting five</StartingFiveTitle>
+                    <StartingFiveTitle>Starting 5</StartingFiveTitle>
                     <Positions>PG: {myStartingFive.PG}</Positions>
                     <Positions>SG: {myStartingFive.SG}</Positions>
                     <Positions>SF: {myStartingFive.SF}</Positions>
@@ -244,16 +329,16 @@ export default function TeamBuilder(props){
 
                  {count === 5 ? 
                     <MainTeamBuilderBox>
-                        <MyTeam className={teamComplete}>
+                        <MyCompleteTeam className={teamComplete}>
                             <StartingFiveTitle>My starting five</StartingFiveTitle>
                                 <Positions>PG: {myStartingFive.PG}</Positions>
                                 <Positions>SG: {myStartingFive.SG}</Positions>
                                 <Positions>SF: {myStartingFive.SF}</Positions>
                                 <Positions>PF: {myStartingFive.PF}</Positions>
                                 <Positions>C: {myStartingFive.C}</Positions>
-                            <StartGame className="postTeamCreate" onClick={additionalTeam}>Create another team</StartGame>
+                            <StartGame className="postTeamCreate" onClick={additionalTeam}>Draft new team</StartGame>
                             <StartGame className="postTeamCreate" onClick={rankTeams}>Rank teams</StartGame>
-                        </MyTeam>
+                        </MyCompleteTeam>
                     </MainTeamBuilderBox>
                 : null}
         </div>
