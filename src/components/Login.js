@@ -17,7 +17,7 @@ export default function Login (props) {
 
     const onSubmit = evt => {
         evt.preventDefault()
-        axios.post('http://localhost:5000/api/auth/login', {username: values.username, password: values.password})
+        axios.post('https://starting5.herokuapp.com/api/auth/login', {username: values.username, password: values.password})
             .then(res => {
                 localStorage.setItem('token', res.data.token)
                     localStorage.setItem('user_id', res.data.user_id)
@@ -31,7 +31,7 @@ export default function Login (props) {
 
     const register = evt => {
         evt.preventDefault()
-        axios.post('http://localhost:5000/api/auth/register', {username: values.username, password: values.password})
+        axios.post('https://starting5.herokuapp.com/api/auth/register', {username: values.username, password: values.password})
             .then(res => {
                 setValues(initialValues)
             })

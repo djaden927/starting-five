@@ -5,6 +5,7 @@ import axios from 'axios' //eslint-disable-line
 import Login from "./components/Login.js"
 import TeamBuilder from "./components/TeamBuilder.js"
 import Vote from "./components/Vote.js"
+import LeaderBoard from './components/LeaderBoard.js'
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path ='/rank-teams'>
           <Vote logout={logout}/>
+        </Route>
+        <Route path ='/leaderboard'>
+          <LeaderBoard logout={logout}/>
         </Route>
         <Route path='/'>
           <Login/>

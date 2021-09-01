@@ -4,7 +4,6 @@ import styled from "styled-components"
 import '../../src/team.css';
 import { useHistory } from 'react-router-dom';
 import axiosWithAuth from "../axiosAuth";
-import LeaderBoard from "./LeaderBoard.js"
 
 //This page handles generating 5 random teams, adding those players to your team and then submitting the team to the database.
 //Need to restrict adding positions that are already on the team.
@@ -205,12 +204,19 @@ export default function TeamBuilder(props){
         history.push('/rank-teams')
     }
 
+    const leaderBoard = (evt) => {
+        evt.preventDefault()
+        count = 0
+        setMyStartingFive(initialStartingFive)
+        history.push('/leaderboard')
+    }
 
     return(
 
         <div className="teamBuilder">
             <header>
             <StartGame className="headerButton" onClick={rankTeamsWithoutSubmit}>Rank teams</StartGame>
+            <StartGame className="headerButton" onClick={leaderBoard}>View Leaderboard</StartGame>
             <StartGame className="headerButton" onClick={logout}>Logout</StartGame> 
             </header>
             
@@ -250,8 +256,6 @@ export default function TeamBuilder(props){
                         </MyTeam>
                     </MainTeamBuilderBox>
                 : null}
-            
-            <LeaderBoard/>
         </div>
     )
 }
